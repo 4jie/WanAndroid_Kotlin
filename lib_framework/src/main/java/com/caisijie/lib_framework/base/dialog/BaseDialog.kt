@@ -2,23 +2,23 @@ package com.caisijie.lib_framework.base.dialog
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.DialogInterface.OnCancelListener
-import android.content.DialogInterface.OnClickListener
-import android.content.DialogInterface.OnDismissListener
-import android.content.DialogInterface.OnShowListener
+import android.content.DialogInterface.*
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.net.IpSecManager.ResourceUnavailableException
-import android.os.Looper
-import androidx.appcompat.app.AppCompatDialog
-import com.caisijie.lib_framework.R
 import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.SparseArray
 import android.util.SparseIntArray
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.*
+import androidx.appcompat.app.AppCompatDialog
+import com.caisijie.lib_framework.R
 import com.caisijie.lib_framework.utils.log.LogUtils.e
 
 /**
@@ -176,19 +176,19 @@ class BaseDialog @JvmOverloads constructor(
         return handler.postAtTime(r, this, uptimeMillis)
     }
 
-    interface onClickListener {
+    interface OnClickListener {
         fun onClick(dialog: BaseDialog?, view: View)
     }
 
-    interface onShowListener {
+    interface OnShowListener {
         fun onShow(dialog: BaseDialog?)
     }
 
-    interface onCancelListener {
+    interface OnCancelListener {
         fun onCancel(dialog: BaseDialog?)
     }
 
-    interface onDismissListener {
+    interface OnDismissListener {
         fun onDismiss(dialog: BaseDialog?)
     }
 
@@ -238,14 +238,14 @@ class BaseDialog @JvmOverloads constructor(
             private set
 
         //Dialog Show监听
-        private var mOnShowListeners: MutableList<onShowListener?>? = null
+        private var mOnShowListeners: MutableList<OnShowListener?>? = null
 
-        private var mOnCancelListeners: MutableList<onCancelListener?>? = null
+        private var mOnCancelListeners: MutableList<OnCancelListener?>? = null
 
-        private var mOnDismissListeners: MutableList<onDismissListener?>? = null
+        private var mOnDismissListeners: MutableList<OnDismissListener?>? = null
 
         //密钥监听器，回调将在密钥事件传递给对话框之前调用
-        private var mOnKeyListener: DialogInterface.OnKeyListener? = null
+        private var mOnKeyListener: OnKeyListener? = null
 
         /**
          * 是否设置了取消（仅供子类调用）
@@ -293,10 +293,6 @@ class BaseDialog @JvmOverloads constructor(
         /**
          * 延迟执行，一定要在创建了Dialog之后调用（供子类调用）
          */
-        fun post(r: Runnable): Boolean {
-            return postDelayed(r, 0)
-        }
-
         protected fun post(r: Runnable): Boolean {
             //Elvis 运算符的备用值
             // 如果 dialog?.post(r) 表达式返回 null（即 dialog 为 null 或调用 post(r) 方法返回 null），那么整个表达式的结果将是 false。
@@ -308,14 +304,6 @@ class BaseDialog @JvmOverloads constructor(
          */
         protected fun postDelayed(r: Runnable, delayMills: Long): Boolean {
             return dialog?.postDelayed(r, delayMills) ?: false
-        }
-
-        fun postDelayed(r: Runnable, delayMills: Long): Boolean {
-            var millis = delayMills
-            if (millis < 0) {
-                millis = 0
-            }
-            return postAtTime(r, SystemClock.uptimeMillis())
         }
 
         /**
@@ -333,6 +321,375 @@ class BaseDialog @JvmOverloads constructor(
             isCancelable = cancelable
             return this as B
         }
+
+        /**
+         * 设置重心位置
+         */
+        fun setGravity(gravity: Int): B {
+            //适配Android4.2新特性，布局反方向（开发者选项-强制使用从右到左的布局方向）
+            var gravity = gravity;
+            gravity = Gravity.getAbsoluteGravity(
+                gravity,
+                context.resources.configuration.layoutDirection
+            )
+            this.gravity = gravity
+            if (mAnimations == -1) {
+                when (this.gravity) {
+                    Gravity.TOP -> mAnimations = AnimStyle.TOP
+                    Gravity.BOTTOM -> mAnimations = AnimStyle.BOTTOM
+                    Gravity.START -> mAnimations = AnimStyle.LEFT
+                    Gravity.END -> mAnimations = AnimStyle.RIGHT
+                    else -> {}
+                }
+            }
+            return this as B
+        }
+
+        /**
+         * 获取资源对象（仅供子类调用）
+         */
+        protected val resources: Resources
+            //访问控制，仅供子类调用
+            get() = context.resources
+
+        /**
+         * 根据id获取一个文本（仅供子类调用）
+         */
+        protected fun getText(@StringRes resId: Int): CharSequence {
+            return context.getText(resId)
+        }
+
+        /**
+         * 根据id获取一个String（仅供子类调用）
+         */
+        protected fun getString(@StringRes resId: Int): String {
+            return context.getString(resId)
+        }
+
+        /**
+         * 根据id获取一个颜色（仅供子类调用）
+         */
+        protected fun getColor(@ColorRes resId: Int): Int {
+            return context.getColor(resId)
+        }
+
+        /**
+         * 根据id获取一个Drawable（仅供子类调用）
+         */
+        protected fun getDrawable(@DrawableRes id: Int): Drawable? {
+            return context.getDrawable(id)
+        }
+
+        /**
+         * 根据id查找View（仅供子类调用）
+         */
+        protected fun <T : View?> findViewById(@IdRes id: Int): T {
+            return mContentView!!.findViewById(id)
+        }
+
+        /**
+         * 销毁当前Dialog（仅供子类调用）
+         */
+        protected fun dismiss() {
+            dialog?.dismiss()
+        }
+
+        /**
+         * 设置主题id
+         */
+        fun setThemeStyle(@StyleRes themeResId: Int): B {
+            mThemeResId = themeResId
+            return this as B
+        }
+
+        /**
+         * 设置布局
+         */
+        fun setContentView(@LayoutRes layoutId: Int): B {
+            return setContentView(LayoutInflater.from(context).inflate(layoutId, null))
+        }
+
+        fun setContentView(view: View): B {
+            mContentView = view
+            return this as B
+        }
+
+        /**
+         * 设置宽度
+         */
+        fun setWidth(width: Int): B {
+            mWidth = width
+            return this as B
+        }
+
+        /**
+         * 设置高度
+         */
+        fun setHeight(height: Int): B {
+            mHeight = height
+            return this as B
+        }
+
+        /**
+         * 点击返回键是否可以取消
+         */
+        fun setCanceledOnTouchOutside(cancelable: Boolean): B {
+            mTouchOutside = cancelable
+            return this as B
+        }
+
+        /**
+         * 设置动画，已封装好几种样式，可见[AnimStyle]类
+         */
+        fun setAnimStyle(@StyleRes resId: Int): B {
+            mAnimations = resId
+            return this as B
+        }
+
+        /**
+         * 设置垂直间距
+         */
+        fun setVerticalMargin(margins: Int): B {
+            mVerticalMargin = margins
+            return this as B
+        }
+
+        /**
+         * 设置水平间距
+         */
+        fun setHorizontalMargin(margin: Int): B {
+            mHorizontalMargin = margin
+            return this as B
+        }
+
+        /**
+         * 设置显示监听
+         */
+        fun addOnShowListener(listener: OnShowListener): B {
+            if (mOnShowListeners == null) {
+                mOnShowListeners = ArrayList()
+            }
+            mOnShowListeners!!.add(listener)
+            return this as B
+        }
+
+        /**
+         * 设置取消监听
+         */
+        fun addOnCancelListener(listener: OnCancelListener): B {
+            if (mOnCancelListeners == null) {
+                mOnCancelListeners = ArrayList()
+            }
+            mOnCancelListeners!!.add(listener)
+            return this as B
+        }
+
+        /**
+         * 设置销毁监听
+         */
+        fun addOnDismissListener(listener: OnDismissListener): B {
+            if (mOnDismissListeners == null) {
+                mOnDismissListeners = ArrayList()
+            }
+            mOnDismissListeners!!.add(listener)
+            return this as B
+        }
+
+        /**
+         * 设置按键监听
+         */
+        fun setOnKeyListener(onKeyListener: OnKeyListener): B {
+            mOnKeyListener = onKeyListener
+            return this as B
+        }
+
+        /**
+         * 设置文本
+         */
+        fun setText(@IdRes id: Int, @StringRes resId: Int): B {
+            return setText(id, context.resources.getString(resId))
+        }
+
+        fun setText(@IdRes id: Int, text: CharSequence): B {
+            mTextArray.put(id, text)
+            return this as B
+        }
+
+        /**
+         * 设置可见状态
+         */
+        fun getBackground(@IdRes id: Int, @DrawableRes resId: Int): B {
+            return setBackground(id, context.getDrawable(resId))
+        }
+
+        fun setBackground(@IdRes id: Int, drawable: Drawable?): B {
+            mBackgroundArray.put(id, drawable)
+            return this as B
+        }
+
+        /**
+         * 设置图片
+         */
+        fun setImageDrawable(@IdRes id: Int, @DrawableRes resId: Int): B {
+            return setBackground(id, context.getDrawable(resId))
+        }
+
+        fun setImageDrawable(@IdRes id: Int, drawable: Drawable?): B {
+            mImageArray.put(id, drawable)
+            return this as B
+        }
+
+        /**
+         * 设置点击事件
+         */
+        fun setOnClickListener(@IdRes id: Int, listener: OnClickListener): B {
+            mClickArray.put(id, listener)
+            return this as B
+        }
+
+        /**
+         * 创建
+         */
+        open fun create(): BaseDialog {
+            //判断布局是否为空
+            requireNotNull(mContentView) { "Dialog layout cannot be empty" }
+            val layoutParams = mContentView?.layoutParams
+            layoutParams?.let {
+                if (mWidth == ViewGroup.LayoutParams.WRAP_CONTENT) {
+                    mWidth = layoutParams.width
+                }
+                if (mHeight == ViewGroup.LayoutParams.WRAP_CONTENT) {
+                    mHeight = layoutParams.height
+                }
+            }
+            //            // 判断有没有设置主题
+//            if (mThemeResId == -1) {
+//                mDialog = new BaseDialog(mContext);
+//            } else {
+//                mDialog = new BaseDialog(mContext, mThemeResId);
+//            }
+            dialog = createDialog(context, mThemeResId)
+            dialog?.setContentView(mContentView!!)
+            //设置点击空白能否取消
+            dialog?.setCancelable(isCancelable)
+            //设置点击Back键能否取消Dialog
+            dialog?.setCanceledOnTouchOutside(mTouchOutside)
+            if (mOnShowListeners != null) {
+                dialog?.setOnShowListener(mOnShowListeners)
+            }
+            if (mOnCancelListeners != null) {
+                dialog?.setOnCancelListener(mOnCancelListeners)
+            }
+            if (mOnDismissListeners != null) {
+                dialog?.setDismissListener(mOnDismissListeners)
+            }
+            if (mOnKeyListener != null) {
+                dialog?.setOnKeyListener(mOnKeyListener)
+            }
+            //判断有没有设置动画
+            if (mAnimations == -1) {
+                //没有就设置默认的动画
+                mAnimations = AnimStyle.DEFAULT
+            }
+            //设置参数
+            val params = dialog?.window?.attributes
+            params?.width = mWidth
+            params?.height = mHeight
+            params?.gravity = gravity
+            params?.windowAnimations = mAnimations
+            params?.horizontalMargin = mHorizontalMargin.toFloat()
+            params?.verticalMargin = mVerticalMargin.toFloat()
+            dialog?.window?.attributes = params
+            //设置文本
+            for (i in 0 until mTextArray.size()) {
+                (mContentView?.findViewById<View>(mTextArray.keyAt(i)) as? TextView)?.text =
+                    mTextArray.valueAt(i)
+            }
+            //设置可见状态
+            for (i in 0 until mVisibilityArray.size()) {
+                mContentView?.findViewById<View>(mVisibilityArray.keyAt(i))?.visibility =
+                    mVisibilityArray.valueAt(i)
+            }
+            //设置背景
+            for (i in 0 until mBackgroundArray.size()) {
+                mContentView?.findViewById<View>(mBackgroundArray.keyAt(i))?.background =
+                    mBackgroundArray.valueAt(i)
+            }
+            //设置图片
+            for (i in 0 until mImageArray.size()) {
+                (mContentView?.findViewById<View>(mImageArray.keyAt(i)) as ImageView).setImageDrawable(
+                    mImageArray.valueAt(i)
+                )
+            }
+            //设置点击事件
+            for (i in 0 until mClickArray.size()) {
+                mContentView?.findViewById<View>(mClickArray.keyAt(i))
+                    ?.setOnClickListener(ViewClickWrapper(dialog, mClickArray.valueAt(i)))
+            }
+            return dialog!!
+        }
+
+
+        /**
+         * 创建对话框对象（子类可以重写此方法来改变Dialog类型）
+         */
+        protected fun createDialog(context: Context, themeResId: Int): BaseDialog {
+            return BaseDialog(context, themeResId)
+        }
+
+        /**
+         * 显示
+         */
+        open fun show(): BaseDialog? {
+            val dialog = create()
+            dialog.show()
+            return dialog
+        }
     }
 
+    /**
+     * 点击事件包装类
+     */
+    private class ViewClickWrapper(private val mDialog: BaseDialog?, listener: OnClickListener) :
+        View.OnClickListener {
+        private val mListener: OnClickListener
+
+        override fun onClick(v: View) {
+            mListener.onClick(mDialog, v)
+        }
+
+        init {
+            mListener = listener
+        }
+    }
+
+    /**
+     * 显示监听包装类，接口回调
+     */
+    class ShowListenerWrapper(private val mListener: DialogInterface.OnShowListener?) :
+        DialogInterface.OnShowListener {
+        override fun onShow(dialog: DialogInterface?) {
+            mListener?.onShow(dialog)
+        }
+    }
+
+    /**
+     * 取消监听包装类
+     */
+    class CancelListenerWrapper private constructor(private val mListener: DialogInterface.OnCancelListener?) :
+        DialogInterface.OnCancelListener {
+        override fun onCancel(dialog: DialogInterface?) {
+            mListener?.onCancel(dialog)
+        }
+    }
+
+    /**
+     * 销毁监听包装类
+     */
+    class DismissListenerWrapper private constructor(private val mListener: DialogInterface.OnDismissListener?) :
+        DialogInterface.OnDismissListener {
+        override fun onDismiss(dialog: DialogInterface?) {
+            mListener?.onDismiss(dialog)
+        }
+    }
 }
