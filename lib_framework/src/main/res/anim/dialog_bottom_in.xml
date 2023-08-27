@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--平移动画：
+android:duration：动画执行的时间，以毫秒为单位
+android:fromYDelta：动画开始时，视图在Y轴方向的偏移量。
+在这里，视图将从初始位置向下移动，偏移量为 100%。
+偏移量的单位可以是像素（px）或百分比（%），这里使用的是百分比，表示相对于视图自身高度的百分比。
+这段代码的作用是将视图在Y轴方向向下平移，从初始位置开始，移动距离为视图自身高度的100%。
+换句话说，视图将从屏幕上方滑动到屏幕中央或下方位置-->
+    <translate
+        android:duration="400"
+        android:fromYDelta="100%"/>
+</set>

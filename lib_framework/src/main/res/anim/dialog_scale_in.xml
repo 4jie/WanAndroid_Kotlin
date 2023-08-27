@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Scale（缩放动画）：
+android:duration：动画执行的时间，单位为毫秒
+android:fromXScale 和 android:fromYScale：动画开始时的X轴和Y轴缩放比例。缩放比例为0.8表示宽度和高度都相对于原始大小减小了20%。
+android:pivotX 和 android:pivotY：缩放动画的中心点位置。50%表示缩放动画的中心点被设置为控件的中心，即 X 轴和 Y 轴的缩放中心都位于控件的中心位置。
+android:startOffset：动画开始前的延迟时间，单位为毫秒
+android:toXScale 和 android:toYScale：动画结束时的X轴和Y轴缩放比例。动画结束时的缩放比例为1.05表示变为原来的1.05倍
+-->
+    <scale
+        android:duration="135"
+        android:fromXScale="0.8"
+        android:fromYScale="0.8"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1.05"
+        android:toYScale="1.05" />
+    <scale
+        android:duration="105"
+        android:fromXScale="1.05"
+        android:fromYScale="1.05"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="135"
+        android:toXScale="0.95"
+        android:toYScale="0.95" />
+    <scale
+        android:duration="60"
+        android:fromXScale="0.95"
+        android:fromYScale="0.95"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="240"
+        android:toXScale="1.0"
+        android:toYScale="1.0" />
+
+    <!--Alpha（透明度动画）：
+android:duration：动画执行的时间，单位为毫秒。
+android:fromAlpha 和 android:toAlpha：动画开始和结束时的透明度值。在这里，动画开始时的透明度为0.0（完全透明），动画结束时的透明度为1.0（完全不透明）。
+android:interpolator：动画插值器，用于控制动画的速度变化。在这里，使用了系统提供的加速插值器（@android:anim/accelerate_interpolator），即动画开始时速度较慢，然后逐渐加速。
+这些属性描述了两个简单的动画效果，即先缩小控件的大小至原始大小的 95%，然后再逐渐恢复到原始大小，并同时将控件的透明度从完全透明渐变到完全不透明。可以将这些动画应用到Android视图上，例如通过XML布局文件或在代码中创建动画对象并应用到视图上。-->
+    <alpha
+        android:duration="90"
+        android:fromAlpha="0.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toAlpha="1.0" />
+</set>

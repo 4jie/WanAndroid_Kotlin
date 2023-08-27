@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <application>
+        <activity
+            android:name=".BaseActivity"
+            android:exported="false"
+            android:label="@string/title_activity_base"
+            android:theme="@style/Theme.WanAndroid_Kotlin.NoActionBar" />
+    </application>
+
+</manifest>

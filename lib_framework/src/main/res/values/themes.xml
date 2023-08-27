@@ -1,0 +1,111 @@
+<resources>
+
+    <style name="Theme.WanAndroid_Kotlin.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.WanAndroid_Kotlin.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.WanAndroid_Kotlin.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!--
+    android:windowBackground：设置窗口的背景颜色或者背景资源。在这里，它被设置为一个名为 "color_translucence" 的颜色资源。
+
+    android:windowFrame：设置窗口的边框背景。设置为 "null"，即没有边框。
+
+    android:windowNoTitle：指定窗口是否没有标题栏。设置为 "true"，表示窗口没有标题栏。
+
+    android:windowIsFloating：指定窗口是否浮动在应用程序上方。设置为 "true"，表示窗口是浮动的。
+
+    android:windowIsTranslucent：指定窗口是否半透明。设置为 "false"，表示窗口不是半透明的。
+
+    android:windowAnimationStyle：设置窗口显示和隐藏时的动画样式。设置为 @android:style/Animation.Dialog，表示使用系统内置的 "Animation.Dialog" 动画样式。
+
+    android:backgroundDimEnabled：指定是否启用背景模糊效果。设置为 "true"，表示启用背景模糊效果。-->
+    <style name="dialog">
+        <item name="android:windowBackground">@color/color_translucence</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="loading_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--        去除黑色边框的关键设置项
+        android:backgroundDimEnabled：是否启用对话框背景的模糊效果。 "true" 对话框背景会被模糊处理
+
+        android:backgroundDimAmount：指定对话框背景的透明度。它的值范围是0到1之间的浮点数，其中0表示完全透明，1表示完全不透明
+        0.6表示对话框背景的透明度为60%。较低的值会使背景更透明，而较高的值会使背景更不透明。-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <style name="BaseDialogStyle" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <!--无边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--浮在Activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--遮盖层-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--无标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--动画效果-->
+        <item name="android:windowEnterAnimation">@anim/dialog_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale_out</item>
+
+        <!--Base.Theme.AppCompat.Light.Dialog.Alert 特有的属性，用于指定默认宽度，这里需要禁用-->
+        <item name="android:windowMinWidthMajor">0dp</item>
+        <item name="android:windowMinWidthMinor">0dp</item>
+        <!--解决ActionBar占位导致Dialog无法全屏显示的问题-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--ActionMode覆盖Actionbar，不顶下来-->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- Dialog 全屏显示 -->
+        <!--<item name="android:windowFullscreen">true</item>-->
+    </style>
+
+    <style name="BottomAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+
+    <style name="IOSAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_ios_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_ios_out</item>
+    </style>
+
+    <style name="LeftAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_left_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_left_out</item>
+    </style>
+
+    <style name="RightAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_right_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_right_out</item>
+    </style>
+
+    <style name="ScaleAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale_out</item>
+    </style>
+
+    <style name="TopAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_top_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_top_out</item>
+    </style>
+</resources>
