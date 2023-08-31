@@ -15,3 +15,10 @@ dependencyResolutionManagement {
 rootProject.name = "WanAndroid_Kotlin"
 include ':app'
 include ':lib_framework'
+include ':mod_main'
+include ':lib_common'
+include ':lib_banner'
+include ':lib_network'
+include ':lib_stater'
+include ':lib_glide'
+include ':lib_room'

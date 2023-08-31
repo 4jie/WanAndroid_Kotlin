@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.loading
+package com.caisijie.framework.loading
 
 import android.app.Dialog
 import android.content.Context
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.Window
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import com.caisijie.lib_framework.R
-import com.caisijie.lib_framework.databinding.DialogLoadingBinding
+import com.caisijie.framework.R
+import com.caisijie.framework.databinding.DialogLoadingBinding
 
 /**
  * 自定义一个通用等待加载中弹窗View

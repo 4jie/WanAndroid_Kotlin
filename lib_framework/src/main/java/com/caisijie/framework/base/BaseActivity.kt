@@ -1,11 +1,11 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
-import com.caisijie.lib_framework.R
-import com.caisijie.lib_framework.toast.TipsToast
-import com.caisijie.lib_framework.utils.LoadingUtils
+import com.caisijie.framework.R
+import com.caisijie.framework.toast.TipsToast
+import com.caisijie.framework.utils.LoadingUtils
 
 /**
  * @author caisijie

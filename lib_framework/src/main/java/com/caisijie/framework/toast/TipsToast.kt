@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.toast
+package com.caisijie.framework.toast
 
 import android.app.Application
 import android.os.Handler
@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.caisijie.lib_framework.R
-import com.caisijie.lib_framework.databinding.WidgetTipsToastBinding
+import com.caisijie.framework.R
+import com.caisijie.framework.databinding.WidgetTipsToastBinding
 
 /**
  * 自定义一个用于显示Toast的工具类

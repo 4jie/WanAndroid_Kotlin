@@ -1,7 +1,6 @@
-package com.caisijie.lib_framework.utils.log
+package com.caisijie.framework.utils.log
 
 import android.app.Application
-import android.os.Debug
 import android.util.Log
 
 /**

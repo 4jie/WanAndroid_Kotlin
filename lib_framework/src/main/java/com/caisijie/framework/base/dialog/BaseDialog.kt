@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.base.dialog
+package com.caisijie.framework.base.dialog
 
 import android.content.Context
 import android.content.DialogInterface
@@ -18,8 +18,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.*
 import androidx.appcompat.app.AppCompatDialog
-import com.caisijie.lib_framework.R
-import com.caisijie.lib_framework.utils.log.LogUtils.e
+import com.caisijie.framework.R
+import com.caisijie.framework.utils.log.LogUtils.e
 
 /**
  * @author caisijie

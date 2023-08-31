@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.caisijie.lib_framework.base.dialog.BaseDialog
-import com.caisijie.lib_framework.utils.log.LogUtils
+import com.caisijie.framework.base.dialog.BaseDialog
+import com.caisijie.framework.utils.log.LogUtils
 
 class BaseDialogFragment : AppCompatDialogFragment() {
     private var mDialog: BaseDialog? = null

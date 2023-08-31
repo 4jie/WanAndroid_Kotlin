@@ -1,11 +1,11 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.webkit.WebSettings
-import com.caisijie.lib_framework.helper.AppHelper
+import com.caisijie.framework.helper.AppHelper
 import com.tencent.smtt.sdk.WebView
 
 /**

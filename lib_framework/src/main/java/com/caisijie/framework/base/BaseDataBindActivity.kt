@@ -1,9 +1,9 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
-import com.caisijie.lib_framework.ext.saveAs
-import com.caisijie.lib_framework.ext.saveAsUnChecked
+import com.caisijie.framework.ext.saveAs
+import com.caisijie.framework.ext.saveAsUnChecked
 import java.lang.reflect.ParameterizedType
 
 /**

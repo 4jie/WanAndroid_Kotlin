@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'//引入Kotlin注解处理器，可以在编译时处理注解
 }
 
 android {
     namespace 'com.caisijie.main'
-    compileSdk 33
+    compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        minSdk 28
-        targetSdk 33
+        minSdk rootProject.android.midSdk
+        targetSdk rootProject.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -28,14 +29,54 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        //数据绑定是一种用于在布局文件中直接访问数据对象的技术，它可以简化 UI 和数据之间的交互
+        //启用数据绑定后，构建系统将为布局文件生成相应的绑定类，可以使用这些绑定类来访问布局文件中的视图并进行数据绑定操作。
+        dataBinding = true
+        //视图绑定是一种用于在代码中访问布局文件中的视图的技术，它可以取代传统的 findViewById 操作，提供类型安全和更简洁的代码。
+        //启用视图绑定后，构建系统将为每个布局文件生成相应的绑定类，可以使用这些绑定类来直接引用布局文件中的视图。
+        viewBinding = true
+    }
 }
 
 dependencies {
+    //指示项目依赖于位于 lib 目录下的所有 JAR 文件。使用 fileTree 函数可以将指定目录下的文件作为依赖添加到项目中。dir 参数指定目录路径，include 参数指定要包含的文件的通配符模式。
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly rootProject.depsLibs.coreKtx
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.material
+    compileOnly rootProject.depsLibs.liveDataKtx
+    compileOnly rootProject.depsLibs.constraintlayout
+    compileOnly rootProject.depsLibs.navigationFragment
+    compileOnly rootProject.depsLibs.navigationUI
+    compileOnly rootProject.depsLibs.viewModelKtx
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testCompileOnly rootProject.depsLibs.junit
+    androidTestCompileOnly rootProject.depsLibs.extJunit
+    androidTestCompileOnly rootProject.depsLibs.espressoCore
+
+    compileOnly rootProject.depsLibs.gson
+    //流式布局
+    compileOnly rootProject.depsLibs.flexbox
+    compileOnly rootProject.depsLibs.mmkv
+
+    compileOnly rootProject.depsLibs.refreshLayout
+    compileOnly rootProject.depsLibs.refreshHeader
+    compileOnly rootProject.depsLibs.refreshFooter
+
+    compileOnly rootProject.depsLibs.arouterApi
+    kapt rootProject.depsLibs.arouterCompiler
+
+    compileOnly rootProject.depsLibs.tbssdk
+    compileOnly rootProject.depsLibs.rxPermission
+    compileOnly rootProject.depsLibs.rxjava
+    compileOnly rootProject.depsLibs.rxandroid
+
+    compileOnly project(path: ':lib_framework')
+    compileOnly project(path: ':lib_common')
+    compileOnly project(path: ':lib_network')
+    compileOnly project(path: ':lib_stater')
+    compileOnly project(path: ':lib_banner')
+    compileOnly project(path: ':lib_glide')
+    compileOnly project(path: ':lib_room')
 }

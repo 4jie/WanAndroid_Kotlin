@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.utils.log
+package com.caisijie.framework.utils.log
 
 import android.app.Application
 import android.content.Context
@@ -6,7 +6,7 @@ import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.WindowManager
-import com.caisijie.lib_framework.utils.DeviceInfoUtils
+import com.caisijie.framework.utils.DeviceInfoUtils
 
 /**
  * 对{@link android.util.Log}做了再封装，现在可以打印的不只是字符串，还可以打印异常

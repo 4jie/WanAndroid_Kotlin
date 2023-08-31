@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModel

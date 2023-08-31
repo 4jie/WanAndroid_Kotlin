@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework
+package com.caisijie.framework
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

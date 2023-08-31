@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.base
+package com.caisijie.framework.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import com.caisijie.lib_framework.toast.TipsToast
-import com.caisijie.lib_framework.utils.LoadingUtils
-import com.caisijie.lib_framework.utils.log.LogUtils
+import com.caisijie.framework.toast.TipsToast
+import com.caisijie.framework.utils.LoadingUtils
+import com.caisijie.framework.utils.log.LogUtils
 
 /**
  * @author caisijie

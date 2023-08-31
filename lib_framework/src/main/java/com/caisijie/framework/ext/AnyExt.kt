@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.caisijie.lib_framework.ext
+package com.caisijie.framework.ext
 
 /**
  * 内联函数，

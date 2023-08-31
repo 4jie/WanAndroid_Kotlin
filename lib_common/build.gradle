@@ -1,18 +1,27 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.caisijie.common'
-    compileSdk 33
+    compileSdk rootProject.android.complieSdk
 
     defaultConfig {
-        minSdk 28
-        targetSdk 33
+        minSdk rootProject.android.minSdk
+        targetSdk rootProject.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        //引入ARouter实现模块间相互调用通信（ARouter好像还是用在通信传递数据这样，需要定义接口统一，像调用其他模块中的类这种通过导入对应库的依赖就可以）
+        kapt {//配置注解处理器，用于在编译时处理注解。它可以用于生成额外的代码、验证注解使用的正确性，或者执行其他与注解相关的任务。
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -28,14 +37,27 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
+    compileOnly fileTree(dir: 'lib', include: ['*.jar'])
+    compileOnly rootProject.depsLibs.coreKtx
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.material
+    compileOnly rootProject.depsLibs.constraintlayout
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    compileOnly rootProject.depsLibs.refreshLayout
+    compileOnly rootProject.depsLibs.refreshHeader
+    compileOnly rootProject.depsLibs.refreshFooter
+
+    compileOnly rootProject.depsLibs.arouterApi
+    kapt rootProject.depsLibs.arouterCompiler
+
+    compileOnly project(path: ':lib_framework')
+    compileOnly project(path: ':lib_banner')
+
 }

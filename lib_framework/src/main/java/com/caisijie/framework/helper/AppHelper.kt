@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.helper
+package com.caisijie.framework.helper
 
 import android.app.Application
 

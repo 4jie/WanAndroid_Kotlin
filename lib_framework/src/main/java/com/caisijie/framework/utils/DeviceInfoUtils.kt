@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework.utils
+package com.caisijie.framework.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import com.caisijie.lib_framework.utils.log.LogUtils
+import com.caisijie.framework.utils.log.LogUtils
 import java.io.FileInputStream
 import java.net.NetworkInterface
 

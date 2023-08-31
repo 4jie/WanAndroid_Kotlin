@@ -1,4 +1,4 @@
-package com.caisijie.lib_framework
+package com.caisijie.framework
 
 import org.junit.Test
 

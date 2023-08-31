@@ -1,10 +1,10 @@
-package com.caisijie.lib_framework.utils
+package com.caisijie.framework.utils
 
 import android.app.Activity
 import android.content.Context
 import android.text.TextUtils
-import com.caisijie.lib_framework.R
-import com.caisijie.lib_framework.loading.CenterLoadingView
+import com.caisijie.framework.R
+import com.caisijie.framework.loading.CenterLoadingView
 
 /**
  * 等待提示框工具类
