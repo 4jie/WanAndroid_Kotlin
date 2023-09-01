@@ -14,6 +14,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        //ARouter,用于模块化之间activity和service的相互调用
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -64,7 +70,7 @@ dependencies {
     compileOnly rootProject.depsLibs.refreshHeader
     compileOnly rootProject.depsLibs.refreshFooter
 
-    compileOnly rootProject.depsLibs.arouterApi
+    compileOnly rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 
     compileOnly rootProject.depsLibs.tbssdk

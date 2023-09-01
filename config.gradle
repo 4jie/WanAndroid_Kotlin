@@ -15,7 +15,7 @@ ext {
     //用于配置应用的一些基本信息
     android = [
             //应用id
-            applicationId    : "com.caiisjie",
+            applicationId    : "com.caiisjie.wanandroid_kotlin",
             //编译版本
             //使用exoPlayer编译版本需要到33，而33中有bug，xml写代码没有代码提示
             complieSdk       : 33,
@@ -97,7 +97,7 @@ ext {
             flexbox           : "com.google.android.flexbox:flexbox:${dependVersion["flexboxVersion"]}",
 
             //路由
-            arouterApi        : "com.alibaba:arouter-api:${dependVersion["aroutreApiVersion"]}",
+            aroutreApi        : "com.alibaba:arouter-api:${dependVersion["aroutreApiVersion"]}",
             arouterCompiler   : "com.alibaba:arouter-compiler:${dependVersion["arouterCompilerVersion"]}",
 
             //腾讯X5

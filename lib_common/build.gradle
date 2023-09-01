@@ -54,7 +54,7 @@ dependencies {
     compileOnly rootProject.depsLibs.refreshHeader
     compileOnly rootProject.depsLibs.refreshFooter
 
-    compileOnly rootProject.depsLibs.arouterApi
+    compileOnly rootProject.depsLibs.aroutreApi
     kapt rootProject.depsLibs.arouterCompiler
 
     compileOnly project(path: ':lib_framework')
