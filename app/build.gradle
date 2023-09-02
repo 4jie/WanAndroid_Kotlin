@@ -78,11 +78,61 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+    //提供Kotlin扩展函数和属性
+    implementation rootProject.depsLibs.coreKtx
+    implementation rootProject.depsLibs.appcompat
+    implementation rootProject.depsLibs.material
+    implementation rootProject.depsLibs.constraintlayout
+    implementation rootProject.depsLibs.liveDataKtx
+    implementation rootProject.depsLibs.viewModelKtx
+    implementation rootProject.depsLibs.navigationFragment
+    implementation rootProject.depsLibs.navigationUI
+    implementation rootProject.depsLibs.lifecycleCommon
+
+    implementation rootProject.depsLibs.roomKtx
+    kapt rootProject.depsLibs.roomCompiler
+
+    testImplementation rootProject.depsLibs.junit
+    androidTestImplementation rootProject.depsLibs.extJunit
+    androidTestImplementation rootProject.depsLibs.espressoCore
+
+    implementation rootProject.depsLibs.retrofit2
+    implementation rootProject.depsLibs.retrofit2Gson
+    implementation rootProject.depsLibs.loggingInterceptor
+
+    implementation rootProject.depsLibs.gson
+
+    //    implementation rootProject.depsLibs.xlog
+
+    implementation rootProject.depsLibs.refreshLayout
+    implementation rootProject.depsLibs.refreshHeader
+    implementation rootProject.depsLibs.refreshFooter
+
+    implementation rootProject.depsLibs.flexbox
+
+    implementation rootProject.depsLibs.aroutreApi
+    kapt rootProject.depsLibs.arouterCompiler
+
+    implementation rootProject.depsLibs.tbssdk
+    implementation rootProject.depsLibs.exoPlayer
+
+    //    implementation rootProject.depsLibs.cameraX
+    implementation rootProject.depsLibs.rxPermission
+    implementation rootProject.depsLibs.rxjava
+    implementation rootProject.depsLibs.rxandroid
+
+    implementation project(path: ':mod_main')
+    implementation project(path: ':mod_user')
+    implementation project(path: ':mod_login')
+    implementation project(path: ':mod_search')
+    implementation project(path: ':mod_video')
+    implementation project(path: ':mod_demo')
+    implementation project(path: ':lib_framework')
+    implementation project(path: ':lib_network')
+    implementation project(path: ':lib_common')
+    implementation project(path: ':lib_stater')
+    implementation project(path: ':lib_banner')
+    implementation project(path: ':lib_glide')
+    implementation project(path: ':lib_room')
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.caisijie.wanandroid_kotlin">
 
     <application
         android:allowBackup="true"
@@ -11,8 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WanAndroid_Kotlin"
         tools:targetApi="31">
+        <!--设置屏幕方向为全感应方向，随传感器感应而改变方向-->
+        <!--android:windowSoftInputMode="adjustPan" 用于指定窗口与软键盘交互方式，
+        使得窗口在软键盘弹出时整体上移，以保持输入焦点可见，适用于那些不希望窗口内容被软键盘遮挡的情况-->
         <activity
             android:name="com.caisijie.main.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

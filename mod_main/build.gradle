@@ -56,6 +56,7 @@ dependencies {
     compileOnly rootProject.depsLibs.navigationFragment
     compileOnly rootProject.depsLibs.navigationUI
     compileOnly rootProject.depsLibs.viewModelKtx
+    compileOnly rootProject.depsLibs.activityKtx
 
     testCompileOnly rootProject.depsLibs.junit
     androidTestCompileOnly rootProject.depsLibs.extJunit

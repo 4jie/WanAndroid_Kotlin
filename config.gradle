@@ -49,6 +49,7 @@ ext {
             rxjavaVersion         : '3.1.6',
             rxandroidVersion      : '3.0.2',
             cameraxVersion        : '1.3.0-alpha04',
+            activityKtxVersion    : '1.7.2'
     ]
     //项目中使用到具体的依赖库名全称
     depsLibs = [
@@ -57,7 +58,7 @@ ext {
             //提供了向后兼容的支持库，使应用能在较旧的版本上使用新的功能
             appcompat         : 'androix.appcompat:appcompat:1.3.0',
             material          : 'com.google.android.material:material:1.4.0',
-            constraintlayout   : 'androidx.constrainlayout:constraintlayout:2.0.4',
+            constraintlayout  : 'androidx.constrainlayout:constraintlayout:2.0.4',
             liveDataKtx       : 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1',
             viewModelKtx      : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1',
             navigationFragment: 'androidx.navigation:navigation-fragment-ktx:2.3.5',
@@ -112,5 +113,8 @@ ext {
             rxPermission      : "com.github.tbruyelle:rxpermissions:${dependVersion["permissionVersion"]}",
             rxjava            : "io.reactivex.rxjava3:rxjava:${dependVersion["rxjavaVersion"]}",
             rxandroid         : "io.reactivex.rxjava3.rxandroid:${dependVersion["rxandroidVersion"]}",
+
+            //解决冲突Cannot access 'androidx.activity.contextaware.ContextAware' which is a supertype of 'com.caisijie.main.MainActivity'. Check your module classpath for missing or conflicting dependencies
+            activityKtx:"androidx.activity:activity-ktx:${dependVersion["activityKtxVersion"]}"
     ]
 }
