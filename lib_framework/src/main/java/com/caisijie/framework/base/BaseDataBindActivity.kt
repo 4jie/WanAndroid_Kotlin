@@ -12,7 +12,7 @@ import java.lang.reflect.ParameterizedType
  * @description dataBinding Activity基类
  */
 abstract class BaseDataBindActivity<DB : ViewBinding> : BaseActivity() {
-    private lateinit var mBinding: DB
+    lateinit var mBinding: DB
 
     override fun setContentLayout() {
         //获取当前类的直接超类的类型
