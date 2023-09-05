@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.caisijie.lib_framework'
-    compileSdk 33
+    compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        minSdk 28
-        targetSdk 33
+        minSdk rootProject.android.minSdk
+        targetSdk rootProject.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -35,14 +35,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.tencent.tbs:tbssdk:44132'
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    compileOnly fileTree(dir:'libs',includes: ['*.jar'])
+    compileOnly rootProject.depsLibs.coreKtx
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.material
+    compileOnly rootProject.depsLibs.gson
+    compileOnly rootProject.depsLibs.refreshLayout
+    compileOnly rootProject.depsLibs.tbssdk
 }
