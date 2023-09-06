@@ -10,6 +10,7 @@
     android:paddingBottom="@dimen/dp_80">
 
     <ImageView
+        android:id="@+id/iv_no_data"
         android:layout_width="@dimen/dp_120"
         android:layout_height="@dimen/dp_164"
         android:scaleType="centerCrop"
@@ -17,6 +18,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        android:id="@+id/tv_no_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_20"
