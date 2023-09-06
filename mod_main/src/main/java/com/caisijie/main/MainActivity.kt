@@ -6,12 +6,14 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.caisijie.common.constant.KEY_INDEX
+import com.caisijie.common.constant.MAIN_ACTIVITY_HOME
 import com.caisijie.framework.base.BaseDataBindActivity
 import com.caisijie.main.databinding.ActivityMainBinding
 import com.caisijie.main.navigator.NewFragmentNavigator
 
-@Route
+@Route(path = MAIN_ACTIVITY_HOME)
 class MainActivity : BaseDataBindActivity<ActivityMainBinding>() {
     private lateinit var navController: NavController
 
@@ -31,10 +33,11 @@ class MainActivity : BaseDataBindActivity<ActivityMainBinding>() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         //2.自定义FragmentNavigator，mobile_navigation.xml文件中的fragment标识改为
-        val fragmentNavigator=NewFragmentNavigator(this,navHostFragment.childFragmentManager,navHostFragment.id)
+        val fragmentNavigator =
+            NewFragmentNavigator(this, navHostFragment.childFragmentManager, navHostFragment.id)
         //3.注册到Navigator里面，这样才找得到
         navController.navigatorProvider.addNavigator(fragmentNavigator)
         //4.设置Graph，需要将activity_main.xml文件中的app:navGraph="@navigation/mobile_navigation"移除
-        navController.setGraph(R.navigation.)
+        navController.setGraph(R.navigation.mobile_navigation)
     }
 }

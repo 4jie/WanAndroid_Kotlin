@@ -41,6 +41,7 @@ ext {
             refreshVersion        : '2.0.6',
             glideVersion          : '4.15.0',
             flexboxVersion        : '3.0.0',
+            aroutreApiVersion     : '1.5.2',
             arouterCompilerVersion: '1.5.2',
             tbssdkVersion         : '44132',
             exoPlayerVersion      : '2.18.5',
@@ -115,6 +116,6 @@ ext {
             rxandroid         : "io.reactivex.rxjava3.rxandroid:${dependVersion["rxandroidVersion"]}",
 
             //解决冲突Cannot access 'androidx.activity.contextaware.ContextAware' which is a supertype of 'com.caisijie.main.MainActivity'. Check your module classpath for missing or conflicting dependencies
-            activityKtx:"androidx.activity:activity-ktx:${dependVersion["activityKtxVersion"]}"
+            activityKtx       : "androidx.activity:activity-ktx:${dependVersion["activityKtxVersion"]}"
     ]
 }
