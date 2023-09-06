@@ -1,18 +1,25 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.caisijie.demo'
-    compileSdk 33
+    compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        minSdk 28
-        targetSdk 33
+        minSdk rootProject.android.minSdk
+        targetSdk rootProject.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        //ARouter
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -28,14 +35,36 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
+    //compileOnly：使用该关键字声明的依赖项表示在编译时需要，但在运行时不需要。
+    // 这种依赖项通常用于编译和构建代码，但不会被打包到最终的输出文件中。
+    compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
+    compileOnly rootProject.depsLibs.coreKtx
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.material
+    compileOnly rootProject.depsLibs.constraintlayout
+    //TODO liveDataKtx的引入使用implementation
+//    compileOnly rootProject.depsLibs.liveDataKtx
+    compileOnly rootProject.depsLibs.viewModelKtx
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    compileOnly rootProject.depsLibs.navigationFragment
+    compileOnly rootProject.depsLibs.navigationUI
+    //implementation：使用该关键字声明的依赖项表示在编译时需要，并且在运行时也需要。
+    //这种依赖项会被包含在最终的输出文件中，用于构建和运行应用程序。
+    implementation rootProject.depsLibs.lifecycleCommon
+
+    compileOnly rootProject.depsLibs.aroutreApi
+    kapt rootProject.depsLibs.arouterCompiler
+
+    compileOnly project(path: ':lib_framework')
+    compileOnly project(path: ':lib_common')
+
+    implementation rootProject.depsLibs.liveDataKtx
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 }

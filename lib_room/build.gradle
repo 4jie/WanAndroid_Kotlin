@@ -1,15 +1,17 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.caisijie.room'
-    compileSdk 33
+    compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        minSdk 28
-        targetSdk 33
+        minSdk rootProject.android.minSdk
+        targetSdk rootProject.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -31,11 +33,22 @@ android {
 }
 
 dependencies {
+    compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
+    compileOnly rootProject.depsLibs.coreKtx
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.material
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    compileOnly rootProject.depsLibs.gson
+
+    compileOnly rootProject.depsLibs.liveDataKtx
+    compileOnly rootProject.depsLibs.viewModelKtx
+
+    compileOnly rootProject.depsLibs.roomKtx
+    //kapt:Kotlin annotation process tool,Kotlin注解处理工具
+    //应用 kapt 插件，可以在构建过程中使用 Kotlin 注解处理器来处理生成代码、元数据或其他操作。
+    //将 roomCompiler 注解处理器作为 KAPT 的依赖项添加到项目中
+    kapt rootProject.depsLibs.roomCompiler
+
+    compileOnly project(path: ':lib_framework')
+    compileOnly project(path: ':lib_common')
 }
