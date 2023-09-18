@@ -34,10 +34,11 @@ dependencies {
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     compileOnly rootProject.depsLibs.coreKtx
     compileOnly rootProject.depsLibs.appcompat
-
     compileOnly rootProject.depsLibs.material
+
     compileOnly rootProject.depsLibs.retrofit2
     compileOnly rootProject.depsLibs.retrofit2Gson
+    compileOnly rootProject.depsLibs.loggingInterceptor
 
     compileOnly rootProject.depsLibs.mmkv
 

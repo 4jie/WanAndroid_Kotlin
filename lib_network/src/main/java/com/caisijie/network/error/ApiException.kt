@@ -1,6 +1,5 @@
 package com.caisijie.network.error
 
-import android.system.StructMsghdr
 import java.io.IOException
 
 /**
@@ -26,11 +25,11 @@ open class ApiException : Exception {
 /**
  * 无网络连接异常类
  */
-class NoNetWorkException : IOException {
-    val errCode: Int
-    val errMsg: String
+class NoNetWorkException(error: ERROR, e: Throwable? = null) : IOException(e) {
+    private val errCode: Int
+    private val errMsg: String
 
-    constructor(error: ERROR, e: Throwable? = null) : super(e) {
+    init {
         errCode = error.code
         errMsg = error.errMsg
     }
