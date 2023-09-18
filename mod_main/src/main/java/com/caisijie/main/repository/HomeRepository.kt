@@ -7,6 +7,7 @@ import com.caisijie.common.model.ProjectTabItem
 import com.caisijie.network.manager.ApiManager
 import com.caisijie.network.repository.BaseRepository
 import com.caisijie.network.response.BaseResponse
+import com.caisijie.room.entity.VideoInfo
 
 /**
  * @author caisijie
@@ -37,7 +38,7 @@ class HomeRepository : BaseRepository() {
     /**
      * 项目tab
      */
-    suspend fun getProjectTab():MutableList<ProjectTabItem>?{
+    suspend fun getProjectTab(): MutableList<ProjectTabItem>? {
         return requestResponse {
             ApiManager.api.getProjectTab()
         }
@@ -48,14 +49,17 @@ class HomeRepository : BaseRepository() {
      * @param page
      * @param cid
      */
-    suspend fun getProjectList(page:Int,cid:Int):ProjectSubList?{
+    suspend fun getProjectList(page: Int, cid: Int): ProjectSubList? {
         return requestResponse {
-            ApiManager.api.getProjectList(page,cid)
+            ApiManager.api.getProjectList(page, cid)
         }
     }
+
     /**
      * 获取视频列表数据
      */
-    suspend fun getVideoListCache():MutableList<>
+    suspend fun getVideoListCache(): MutableList<VideoInfo>? {
+        return Vide
+    }
 
 }
