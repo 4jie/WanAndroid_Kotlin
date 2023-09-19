@@ -8,6 +8,7 @@ import com.caisijie.network.manager.ApiManager
 import com.caisijie.network.repository.BaseRepository
 import com.caisijie.network.response.BaseResponse
 import com.caisijie.room.entity.VideoInfo
+import com.caisijie.room.manager.VideoCacheManager
 
 /**
  * @author caisijie
@@ -59,7 +60,7 @@ class HomeRepository : BaseRepository() {
      * 获取视频列表数据
      */
     suspend fun getVideoListCache(): MutableList<VideoInfo>? {
-        return Vide
+        return VideoCacheManager.getVideoList()
     }
 
 }
