@@ -37,7 +37,7 @@ open class BaseViewModel : ViewModel() {
      * @param errorBlock 错误回调
      * @param responseBlock 请求函数
      */
-    private suspend fun <T> safeApiCall(
+    suspend fun <T> safeApiCall(
         errorBlock: suspend (Int?, String?) -> Unit,
         responseBlock: suspend () -> T?
     ): T? {
