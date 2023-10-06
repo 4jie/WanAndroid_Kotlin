@@ -1,4 +1,4 @@
-package com.caisijie.main.ui.home
+package com.caisijie.main.ui.home.viewmodel
 
 import android.content.res.AssetManager
 import androidx.lifecycle.LiveData
