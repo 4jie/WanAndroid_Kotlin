@@ -24,7 +24,9 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding,HomeViewModel>(),OnRefr
     private var mFragmentAdapter:ViewPage2FragmentAdapter?=null
     private var mProjectTabs:MutableList<ProjectTabItem> = mutableListOf()
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        mBinding?
+        mBinding?.refreshLayout?.apply {
+
+        }
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
